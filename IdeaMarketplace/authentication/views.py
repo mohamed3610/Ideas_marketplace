@@ -61,7 +61,7 @@ def login_employee(request):
         if user is not None:
             login(request,user)
             messages.success(request, 'You have successfully logged in!')
-            return redirect('home')
+            return redirect('Home')
         else:
             messages.error(request, 'Invalid username or password.')
             return redirect('register')
@@ -69,3 +69,9 @@ def login_employee(request):
         return render(request, 'authentication/register.html')
     
 
+
+def homePage(request):
+    if request.user.is_authenticated:
+        return render(request , "authentication/home.html")
+    else:
+        return redirect("register")
