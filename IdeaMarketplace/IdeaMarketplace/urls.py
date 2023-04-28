@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import path , include
 from django.contrib.auth import views as auth_views
 from authentication.views import ResetPasswordView
+from django.conf import settings
+from django.conf.urls.static import static
 urlpatterns = [
     path('password-reset/', ResetPasswordView.as_view(), name='password_reset'),
     path('password-reset-confirm/<uidb64>/<token>/',
@@ -28,4 +30,4 @@ urlpatterns = [
          name='password_reset_complete'),
     path('admin/', admin.site.urls),
     path("" , include("authentication.urls")),
-]
+]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
