@@ -3,6 +3,13 @@ from authentication.models import Employee
 from django.core.validators import MaxValueValidator , MinValueValidator
 
 # Create your models here.
+class Budget(models.Model):
+    budget = models.FloatField()
+    remaining_budget = models.FloatField()
+    created_by = models.ForeignKey(Employee , on_delete=models.SET_NULL , null = True)
+    set_at = models.DateTimeField(auto_now=True)
+
+
 
 class Score(models.Model):
     feasibility = models.FloatField()
@@ -65,7 +72,7 @@ class Ideas(models.Model):
     files = models.ManyToManyField(Files)
     features = models.ManyToManyField(Features)
     created_at = models.DateTimeField(auto_now=True)
-    
+    employee = models.ForeignKey(Employee , on_delete=models.SET_NULL , null = True)
 
 
 class Projects(models.Model):
@@ -84,7 +91,7 @@ class Projects(models.Model):
     created_at = models.DateTimeField(auto_now=True)
     start_date = models.DateTimeField(null = True)
     end_date = models.DateTimeField(null = True)
-    budget = models.IntegerField()
+    budget = models.ForeignKey(Budget , on_delete=models.PROTECT)
 
     
 class Archived_Ideas(models.Model):

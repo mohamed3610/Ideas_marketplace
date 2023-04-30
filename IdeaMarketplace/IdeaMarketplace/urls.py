@@ -30,4 +30,5 @@ urlpatterns = [
          name='password_reset_complete'),
     path('admin/', admin.site.urls),
     path("" , include("authentication.urls")),
+    path("Ideas_Projects", include("Ideas.urls")),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

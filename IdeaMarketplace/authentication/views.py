@@ -1,19 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Employee
-from django.contrib.auth.tokens import default_token_generator
-from django.core.mail import send_mail , BadHeaderError
-from django.template.loader import render_to_string
-from django.utils.encoding import force_bytes
-from django.utils.http import urlsafe_base64_encode
+
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.views import PasswordResetView
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
-from django.db.models.query_utils import Q
-from django.contrib.auth.forms import PasswordResetForm
 
-from django.http import HttpResponse
 
 # Create your views here.
 

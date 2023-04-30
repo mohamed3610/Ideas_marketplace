@@ -1,0 +1,261 @@
+*{
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: sans-serif;
+  }
+  body{
+    background: rgb(226, 226, 226);
+  }
+  nav{
+    position: sticky;
+    top: 0;
+    bottom: 0;
+    height: 100vh;
+    left: 0;
+    width: 90px;
+    /* width: 280px; */
+    background: #fff;
+    overflow: hidden;
+    transition: 1s;
+  }
+  nav:hover{
+    width: 280px;
+    transition: 1s;
+  }
+  .logo{
+    text-align: center;
+    display: flex;
+    margin: 10px 0 0 10px;
+    padding-bottom: 3rem;
+  }
+  
+  .logo img{
+    width: 45px;
+    height: 45px;
+    border-radius: 10%;
+  }
+  .logo span{
+    font-weight: bold;
+    padding-left: 15px;
+    font-size: 18px;
+    text-transform: uppercase;
+  }
+  a{
+    position: relative;
+    width: 280px;
+    font-size: 14px;
+    color: rgb(85, 83, 83);
+    display: table;
+    padding: 10px;
+  }
+  nav .fas{
+    position: relative;
+    width: 70px;
+    height: 40px;
+    top: 20px;
+    font-size: 20px;
+    text-align: center;
+  }
+  .nav-item{
+    position: relative;
+    top: 17px;
+    margin-left: 10px;
+  }
+  a:hover{
+    background: #eee;
+  }
+  a:hover i{
+    color: #3c00a0;
+    transition: 0.5s;
+  }
+  .logout{
+    position: absolute;
+    bottom: 0;
+  }
+  
+  .container{
+    display: flex;
+  }
+  
+  .main{
+    position: relative;
+    padding: 20px;
+    width: 100%;
+  }
+  .main-top{
+    display: flex;
+    width: 100%;
+    margin: 10px;
+  }
+  .main-top i{
+    position: absolute;
+    right: 0;
+    margin: 10px 30px;
+    color: rgb(110, 109, 109);
+    cursor: pointer;
+  }
+
+  
+
+  .container{
+    width: 100%;
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    
+  }
+  .form-box{
+    width: 90%;
+    max-width: 450px;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50% , -50%);
+    background: #fff;
+    padding: 50px 60px 70px;
+    text-align: center;
+    opacity: 0;
+    animation: fade-in 1.5s forwards;
+  
+  
+  }
+  @keyframes fade-in {
+  
+      from {
+        opacity: 0 ;
+  
+      }
+      to {
+        opacity: 100;
+      }
+  }
+  .form-box h1{
+    font-size: 30px;
+    margin-bottom:50px;
+    color:#3c00a0;
+    position: relative;
+  }
+  
+ 
+  .input-field{
+    background: #eaeaea;
+    margin: 15px 0;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    max-height: 65px;
+    /* transition: max-height 0.5s; */
+    overflow: hidden;
+  }
+  input{
+    width: 100%;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    padding: 18px 15px;
+    
+    
+    
+  
+  }
+  .input-field i{
+    margin-left: 15px;
+    color:#999;
+  }
+  form p{
+    text-align: left;
+    font-size: 13px;
+  }
+  
+  form p a{
+    text-decoration:none;
+    color:#3c00a0;
+  }
+  .btn-field{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    
+  
+  }
+  .btn-field button{
+    flex-basis: 48%;
+    background: #3c00a0;
+    color: #fff;
+    height: 40px;
+    border-radius: 20px;
+    border: 0;
+    outline : 0;
+    cursor:pointer;
+    transition: background 1s;
+    margin-top: 10px;
+  }
+  .input-group{
+    height: 280px;
+  }
+  .btn-field button.disable{
+    background: #eaeaea;
+    color: #555;
+  }
+  .messages{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .wrap{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 40px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #999;
+  }
+  .add{
+    text-decoration:none;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    font-size: 2rem;
+    font-weight: bold;
+    color:#3c00a0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+  }
+
+  .flex{
+    display: flex;
+    
+  }
+  .delete{
+    text-decoration: none;
+    display: inline-block;
+    background: red;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    width: 30px;
+    height: 30px;
+    margin-left: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+  }
+  .messages .error{
+    color: red;
+  }
+  .messages .success{
+    color: green;
+  }

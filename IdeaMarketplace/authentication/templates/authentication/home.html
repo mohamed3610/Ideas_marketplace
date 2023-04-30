@@ -24,7 +24,7 @@
           <i class="fas fa-comment"></i>
           <span class="nav-item">Message</span>
         </a></li>
-        <li><a href="#">
+        <li><a href="{% url 'submit_an_idea' %}">
           <i class="fas fa-lightbulb"></i>
           <span class="nav-item">Submit an Idea</span>
         </a></li>
@@ -48,7 +48,7 @@
     <section class="main">
       <div class="main-top">
         <h1>Tasks</h1>
-        <i class="fas fa-user-cog"></i>
+        <i class="fa-solid fa-list-check"></i>
       </div>
       <div class="ideas">
         <div class="card">
@@ -179,11 +179,13 @@
               
             </tbody>
           </table>
+          <a class="view_all">View more <i class="fa-solid fa-arrow-right" id = "arrow"></i></a>
+
         </div>
       </section>
       <section class="projects">
         <div class="projects-list">
-          <h1>Ideas List</h1>
+          <h1>Ideas List </h1>
           <table class="table">
             <thead>
               <tr>
@@ -236,8 +238,12 @@
                 <td><button>View</button></td>
               </tr>
               
+
             </tbody>
+           
           </table>
+          <a class="view_all">View more <i class="fa-solid fa-arrow-right" id = "arrow"></i></a>
+          
         </div>
       </section>
     </section>
