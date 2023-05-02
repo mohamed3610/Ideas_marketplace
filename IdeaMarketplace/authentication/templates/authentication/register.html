@@ -28,15 +28,31 @@
                         <i class="fa-solid fa-user"></i>
                         <input type="text" placeholder="Username" name = "username">
                     </div>
+                    <div class="input-group">
+                        <div class="input-field" id="first_nameField">
+                            <i class="fa-solid fa-n"></i>
+
+                            <input type="text" placeholder="First name" name = "first_name">
+                        </div>
+                        <div class="input-group">
+                            <div class="input-field" id="last_nameField">
+                                <i class="fa-solid fa-n"></i>
+    
+                                <input type="text" placeholder="Last name" name = "last_name">
+                            </div>
                     <div class="input-field" id="emailField">
                         <i class="fa-solid fa-envelope"></i>
                         <input type="email" placeholder="Email" name="email">
                     </div>
-                    <div class="input-field">
+                    <div class="input-field" id="departmentField">
+                        <i class="fa-solid fa-briefcase"></i>
+                        <input type="text" placeholder="Department" name="department">
+                    </div>
+                    <div class="input-field" id = "passwordField">
                         <i class="fa-solid fa-lock"></i>
                         <input type="password" placeholder="Password" name = "password">
                     </div>
-                    <p>Forgot password? <a href="{% url 'password_reset' %}">Click Here!</a></p>
+                    <p >Forgot password? <a href="{% url 'password_reset' %}" class="forget_password">Click Here!</a></p>
                 </div>
                 <div class="btn-field">
                     <button type="button" id="signupBtn">Sign Up</button>
@@ -54,6 +70,8 @@
         let form = document.querySelector("form")
         let title = document.getElementById("title")
         const inputFields = document.querySelectorAll('input');
+        var form_box = document.getElementsByClassName("form-box")[0];
+        var btnField = document.getElementsByClassName("btn-field")[0];
 
         inputFields.forEach(field => {
         field.addEventListener('keypress', e => {
@@ -65,6 +83,14 @@
         });
         loginBtn.onclick = function(){
             emailField.style.maxHeight = "0";
+            first_nameField.style.maxHeight = "0";
+            last_nameField.style.maxHeight = "0";
+            departmentField.style.maxHeight = "0";
+            passwordField.style.marginTop = "-40px";
+            btnField.style.marginTop = "-120px";
+            form_box.style.height = "70%";
+            
+
             title.innerHTML = "Login"
             signupBtn.classList.add("disable");
             loginBtn.classList.remove("disable");
@@ -72,6 +98,13 @@
         }
         signupBtn.onclick = function(){
             emailField.style.maxHeight = "60px";
+            first_nameField.style.maxHeight = "60px";
+            last_nameField.style.maxHeight = "60px";
+            departmentField.style.maxHeight = "60px";
+            btnField.style.marginTop = "10px";
+            passwordField.style.marginTop = "15px";
+
+            form_box.style.height = "670px";
             title.innerHTML = "Sign Up"
             signupBtn.classList.remove("disable");
             loginBtn.classList.add("disable");

@@ -1,6 +1,7 @@
 from django.shortcuts import render , redirect , reverse
 from .models import Tags , Files , Features , Ideas , Projects
 from django.contrib import messages
+from django.contrib.auth.decorators import user_passes_test
 
 # Create your views here.
 
@@ -40,22 +41,35 @@ def add_files(request , idea_id):
 
 def add_tags(request, idea_id):
     idea = Ideas.objects.get(id=idea_id)
-    
-    if request.method == 'POST':
-        
-        tag_name = request.POST['tags']
-        if Tags.objects.filter(tag = tag_name).exists():
-            idea.tags.add(Tags.objects.filter(tag = tag_name)[0])
-        else:
 
+    if request.method == 'POST':
+        tag_name = request.POST['tags']
+        if Tags.objects.filter(tag=tag_name).exists():
+            idea.tags.add(Tags.objects.filter(tag=tag_name)[0])
+        else:
             tag = Tags.objects.create(tag=tag_name)
             idea.tags.add(tag)
 
         if 'add_tag' in request.POST:
+            # Add tag button was clicked, redirect back to the same page
             return redirect(reverse('add_tags', args=[idea_id]))
         elif 'finish' in request.POST:
-            return redirect(reverse('idea_detail', args=[idea_id]))
+            # Finish button was clicked, redirect to another page
+            return redirect(reverse('view_idea', args = [idea_id]))
 
-    return render(request, 'Ideas/add_tags.html',{
-        "idea_id": idea_id,
+    return render(request, 'Ideas/add_tags.html', {
+        'idea_id': idea_id,
     })
+
+
+def view_idea(request,idea_id):
+    if request.user.is_authenticated:
+        idea = Ideas.objects.get(pk=idea_id)
+        return render(request , "Ideas/view_idea.html", {
+            "idea_id" : idea_id,
+            "idea":idea,
+        })
+
+@user_passes_test(lambda u: u.groups.filter(name__in=['HR', 'Marketing']).exists())
+def add_score(request):
+    pass

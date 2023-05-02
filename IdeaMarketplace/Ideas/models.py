@@ -1,6 +1,7 @@
 from django.db import models
 from authentication.models import Employee
 from django.core.validators import MaxValueValidator , MinValueValidator
+from django.contrib.auth.models import Group, Permission
 
 # Create your models here.
 class Budget(models.Model):
@@ -12,6 +13,7 @@ class Budget(models.Model):
 
 
 class Score(models.Model):
+    creator = models.ForeignKey(Employee, on_delete=models.CASCADE)
     feasibility = models.FloatField()
     market_value = models.FloatField()
     cost_efective = models.FloatField()
@@ -123,3 +125,10 @@ class Archived_Projects(models.Model):
 
 
 
+score_permission = Permission.objects.get(codename='add_score')
+
+
+hr_group = Group.objects.get(name='HR')
+hr_group.permissions.add(score_permission)
+marketing_group = Group.objects.get(name='Marketing')
+marketing_group.permissions.add(score_permission)

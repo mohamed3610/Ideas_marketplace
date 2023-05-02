@@ -27,8 +27,8 @@
                 </div>
               
                 <div class="btn-field">
-                  <button type="button" id="addTagBtn">Add tag</button>
-                  <button type="submit" id="submitBtn">Finish</button>
+                  <button type="button" id="addTagBtn" name="add_tag">Add tag</button>
+                  <button type="submit" id="submitBtn" name = "finsih" formaction="{% url 'view_idea' idea_id %}">Finish</button>
                 </div>
               </form>
         </div>
@@ -36,17 +36,18 @@
     </div>
     
 {% endblock %}
+{% block scripts %}
 <script>
-    var addTagBtn = document.getElementById('addTagBtn');
-    var tagsContainer = document.getElementById('tagsContainer');
-    var tagIndex = 1;
-  
-    addTagBtn.addEventListener('click', function() {
+    var addTagBtn = document.getElementById("addTagBtn");
+    var tagsContainer = document.getElementById("tagsContainer");
+    tagIndex = 1;
+    addTagBtn.onclick = function() {
+      console.log(1)
       var newTagField = document.createElement('div');
-      newTagField.classList.add('input-field');
-      newTagField.innerHTML = '<i class="fa-solid fa-tag"></i> <input type="text" name="tags" placeholder="Enter a tag">';
-      tagsContainer.appendChild(newTagField);
-      tagIndex++;
-    });
+  newTagField.classList.add('input-field');
+  newTagField.innerHTML = '<i class="fa-solid fa-tag"></i> <input type="text" name="tags" placeholder="Enter a tag">';
+  tagsContainer.appendChild(newTagField);
+  tagIndex++;
+  };
   </script>
-</html>
+  {% endblock %}

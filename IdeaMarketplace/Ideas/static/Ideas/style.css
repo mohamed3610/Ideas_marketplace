@@ -124,6 +124,10 @@
   
   
   }
+  #add_tag{
+    height: 0;
+    display: none;
+  }
   @keyframes fade-in {
   
       from {

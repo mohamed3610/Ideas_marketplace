@@ -16,6 +16,7 @@
 .form-box{
   width: 90%;
   max-width: 450px;
+  height: 670px;
   position: absolute;
   top:50%;
   left:50%;
@@ -25,6 +26,7 @@
   text-align: center;
   opacity: 0;
   animation: fade-in 1.5s forwards;
+  transition: height 0.5s ease;
 
 
 }
@@ -86,11 +88,15 @@ form p{
 form p a{
   text-decoration:none;
   color:#3c00a0;
+
 }
 .btn-field{
   width: 100%;
   display: flex;
   justify-content: space-between;
+  margin-top: 10px;
+  transition: margin 0.5s ease;
+
 
 }
 .btn-field button{
@@ -103,7 +109,9 @@ form p a{
   outline : 0;
   cursor:pointer;
   transition: background 1s;
+  
 }
+
 .input-group{
   height: 280px;
 }

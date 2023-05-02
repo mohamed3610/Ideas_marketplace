@@ -28,7 +28,10 @@ def register(request):
        
             username = request.POST['username']
             email = request.POST['email']
-            password = request.POST['email']
+            password = request.POST['password']
+            first_name = request.POST['first_name']
+            last_name = request.POST['last_name']
+            department = request.POST['department']
             if not email.endswith('@ecs-co.com'):
                 messages.error(request, 'Only email addresses from @ecs-co.com domain are allowed.' , extra_tags='error')
                 return redirect('register')
@@ -37,7 +40,8 @@ def register(request):
                 messages.error(request, 'Username is already taken.', extra_tags='error')
                 return redirect('register')
 
-            Employee.objects.create(username = username, password = password , email = email)
+            Employee.objects.create_user(username = username, password = password , email = email , 
+                                         first_name = first_name , last_name = last_name , department = department)
             messages.success(request, f'Account created for {username}! they can now login.')
             return redirect('register')
     else:

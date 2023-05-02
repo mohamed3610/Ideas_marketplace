@@ -1,0 +1,45 @@
+{% extends "Ideas/base.html" %}
+{% load static %}
+
+{% block styles %}   <link rel="stylesheet" type="text/css" href="{% static 'IdeaMarketplace/home.css' %}"> {% endblock %}
+{% block title %} Home Dashboard {% endblock %}
+{% block body %}
+
+    
+      <section class="projects">
+        <div class="projects-list">
+          <h1>Projects List</h1>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Value proposition</th>
+                <th>Files</th>
+                <th>Score</th>
+                <th>Employee</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>idea.id</td>
+                <td>idea.name</td>
+                <td>idea.description</td>
+                <td><button>Download files</button></td>
+                <td>idea.score</td>
+                <td>idea.employee</td>
+                
+                <td><button>View</button></td>
+              </tr>
+              
+              
+            </tbody>
+          </table>
+        </div>
+      </section>
+      
+  </div>
+
+{% endblock %}
