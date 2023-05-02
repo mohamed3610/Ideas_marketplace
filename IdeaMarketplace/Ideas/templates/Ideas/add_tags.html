@@ -1,0 +1,52 @@
+{% extends "Ideas/base.html" %}
+{% load static %}
+{% block styles %}     <link rel="stylesheet" type="text/css" href="{% static 'Ideas/style.css' %}"> {% endblock %}
+{% block titlt %} Add tags {% endblock %}
+{% block body %}
+
+
+    
+    <div class="container">
+        <div class="form-box">
+            <h1 id="title"><i class="fa-solid fa-lightbulb fa-2xl"></i></h1>
+            <form id="addTagsForm" method="post" action="{% url 'add_tags' idea_id %}">
+                {% csrf_token %}
+                {% if messages %}
+                  <ul class="messages">
+                    {% for message in messages %}
+                      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              
+                <div id="tagsContainer">
+                  <div class="input-field">
+                    <i class="fa-solid fa-tag"></i>
+                    <input type="text" name="tags" placeholder="Enter a tag">
+                  </div>
+                </div>
+              
+                <div class="btn-field">
+                  <button type="button" id="addTagBtn">Add tag</button>
+                  <button type="submit" id="submitBtn">Finish</button>
+                </div>
+              </form>
+        </div>
+
+    </div>
+    
+{% endblock %}
+<script>
+    var addTagBtn = document.getElementById('addTagBtn');
+    var tagsContainer = document.getElementById('tagsContainer');
+    var tagIndex = 1;
+  
+    addTagBtn.addEventListener('click', function() {
+      var newTagField = document.createElement('div');
+      newTagField.classList.add('input-field');
+      newTagField.innerHTML = '<i class="fa-solid fa-tag"></i> <input type="text" name="tags" placeholder="Enter a tag">';
+      tagsContainer.appendChild(newTagField);
+      tagIndex++;
+    });
+  </script>
+</html>

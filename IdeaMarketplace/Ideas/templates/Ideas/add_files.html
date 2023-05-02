@@ -1,57 +1,10 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static 'Ideas/style.css' %}">
-    <script src="https://kit.fontawesome.com/89aaa44108.js" crossorigin="anonymous"></script>
-  
-    <title>Add files</title>
-</head>
-<body>
-    <div class="container">
-        <nav>
-          <ul>
-            <li><a href="#" class="logo">
-              <img src="../../static/images/Logo.png">
-              <span class="nav-item">{{ request.user }}</span>
-            </a></li>
-            <li><a href="#">
-              <i class="fas fa-table"></i>
-              <span class="nav-item">Dashboard</span>
-            </a></li>
-            <li><a href="#">
-              <i class="fas fa-comment"></i>
-              <span class="nav-item">Message</span>
-            </a></li>
-            <li><a href="{% url 'submit_an_idea' %}">
-              <i class="fas fa-lightbulb"></i>
-              <span class="nav-item">Submit an Idea</span>
-            </a></li>
-            <li><a href="#">
-              <i class="fas fa-search"></i>
-              <span class="nav-item">Search for ideas</span>
-            </a></li>
-            <li><a href="#">
-              <i class="fas fa-cog"></i>
-              <span class="nav-item">Setting</span>
-            </a></li>
-    
-            <li><a href="#" class="logout">
-              <i class="fas fa-sign-out-alt"></i>
-              <span class="nav-item">Log out</span>
-            </a></li>
-          </ul>
-        </nav>
-
-
-    
+{% extends "Ideas/base.html" %}
+{% block title %} Add files {% endblock %}
+    {% block body %}
     <div class="container">
         <div class="form-box">
             <h1 id="title"><i class="fa-solid fa-lightbulb fa-2xl"></i></h1>
-            <form  method="post" action = "{% url 'submit_an_idea' %}" enctype="multipart/form-data">
+            <form  method="post" action = "{% url 'add_files' idea_id.id %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 {% if messages %}
                     <ul class="messages">
@@ -78,8 +31,8 @@
         </div>
 
     </div>
-    
-</body>
+    {% endblock %}
+
 <script>
     const addBtn = document.querySelector(".add");
 

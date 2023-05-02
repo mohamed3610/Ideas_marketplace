@@ -12,7 +12,7 @@ def submit_Idea(request):
             problem_to_solve = request.POST["problem_to_solve"]
             if Ideas.objects.filter(name = name).exists():
                 messages.error(request, f"An Idea with the name '{name}' already exists. Please review the existing idea to see if you can add your input or choose a different name for your new idea.", extra_tags='error')
-            
+                return render(request , "Ideas/add_ideas.html")
             else:
                 idea_id = Ideas.objects.create(name = name , description = description , problem_to_solve = problem_to_solve , employee = request.user)
                 return redirect(reverse("submit_files" ,args=[idea_id.id]))
@@ -25,6 +25,37 @@ def submit_Idea(request):
     
 def add_files(request , idea_id):
     idea = Ideas.objects.get(id = idea_id)
+    if request.method == "POST":
+        files = request.FILES.getlist('files')
+        for file in files:
+            single_file = Files.objects.create(file = file , employee = request.user)
+            idea.files.add(single_file)
+        return redirect(reverse("add_tags", args=[idea.id]))
+    
+
+
     return render(request,"Ideas/add_files.html" , {
-        "idea":idea
+        "idea_id":idea,
     }) 
+
+def add_tags(request, idea_id):
+    idea = Ideas.objects.get(id=idea_id)
+    
+    if request.method == 'POST':
+        
+        tag_name = request.POST['tags']
+        if Tags.objects.filter(tag = tag_name).exists():
+            idea.tags.add(Tags.objects.filter(tag = tag_name)[0])
+        else:
+
+            tag = Tags.objects.create(tag=tag_name)
+            idea.tags.add(tag)
+
+        if 'add_tag' in request.POST:
+            return redirect(reverse('add_tags', args=[idea_id]))
+        elif 'finish' in request.POST:
+            return redirect(reverse('idea_detail', args=[idea_id]))
+
+    return render(request, 'Ideas/add_tags.html',{
+        "idea_id": idea_id,
+    })

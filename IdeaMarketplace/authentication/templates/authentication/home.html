@@ -1,49 +1,9 @@
+{% extends "Ideas/base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Attendance Dashboard | By Code Info</title>
-  <link rel="stylesheet" type="text/css" href="{% static 'IdeaMarketplace/home.css' %}">
-    <script src="https://kit.fontawesome.com/89aaa44108.js" crossorigin="anonymous"></script>
-  
-</head>
-<body>
-  <div class="container">
-    <nav>
-      <ul>
-        <li><a href="#" class="logo">
-          <img src="../../static/images/Logo.png">
-          <span class="nav-item">{{ request.user }}</span>
-        </a></li>
-        <li><a href="#">
-          <i class="fas fa-table"></i>
-          <span class="nav-item">Dashboard</span>
-        </a></li>
-        <li><a href="#">
-          <i class="fas fa-comment"></i>
-          <span class="nav-item">Message</span>
-        </a></li>
-        <li><a href="{% url 'submit_an_idea' %}">
-          <i class="fas fa-lightbulb"></i>
-          <span class="nav-item">Submit an Idea</span>
-        </a></li>
-        <li><a href="#">
-          <i class="fas fa-search"></i>
-          <span class="nav-item">Search for ideas</span>
-        </a></li>
-        <li><a href="#">
-          <i class="fas fa-cog"></i>
-          <span class="nav-item">Setting</span>
-        </a></li>
 
-        <li><a href="#" class="logout">
-          <i class="fas fa-sign-out-alt"></i>
-          <span class="nav-item">Log out</span>
-        </a></li>
-      </ul>
-    </nav>
-
+{% block styles %}   <link rel="stylesheet" type="text/css" href="{% static 'IdeaMarketplace/home.css' %}"> {% endblock %}
+{% block title %} Home Dashboard {% endblock %}
+{% block body %}
 
     <section class="main">
       <div class="main-top">
@@ -249,5 +209,4 @@
     </section>
   </div>
 
-</body>
-</html>
+{% endblock %}
