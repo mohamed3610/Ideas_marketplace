@@ -1,0 +1,70 @@
+{% extends "Ideas/base.html" %}
+{% load static %}
+
+{% block styles %}   
+  <link rel="stylesheet" type="text/css" href="{% static 'Ideas/style.css' %}">
+{% endblock %}
+
+{% block title %} Add files {% endblock %}
+
+{% block body %}
+  <div class="container">
+    <div class="form-box">
+      <h1 id="title"><i class="fa-solid fa-star-half-stroke"></i></h1>
+      <h1>Add a score to {{ idea.name }}</h1>
+    
+      <!-- Display the form -->
+      <form method="post" action="{% url 'add_scores' idea.id %}">
+        {% csrf_token %}
+        {% if form.errors %}
+          <div class="alert alert-danger">
+           
+            <ul class="messages">
+              {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                  <li{% if message.tags %} class="error"{% endif %}>{{ error }}</li>
+                {% endfor %}
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+        <table>
+            {% for field in form.visible_fields %}
+              <tr>
+                <td>{{ field }}</td>
+              </tr>
+            {% endfor %}
+          </table>
+  
+        <div class="btn-field">
+            <button type="submit" id="signupBtn">Next</button>
+
+        </div>
+      </form>
+    </div>
+  </div>
+  {% block scripts %}
+  <script>
+    // Function to set placeholders for specific form fields
+    function setPlaceholders() {
+      var placeholderMap = {
+        'id_feasibility': 'Feasibility',
+        'id_market_value': 'Market Value',
+        'id_cost_effective': 'Cost Effective',
+        'id_risk': 'Risk',
+        'id_originality': 'Originality',
+        'id_value_proposition': 'Value Proposition',
+      };
+
+      for (var id in placeholderMap) {
+        if (placeholderMap.hasOwnProperty(id)) {
+          document.getElementById(id).placeholder = placeholderMap[id];
+        }
+      }
+    }
+
+    // Call the function to set placeholders when the page loads
+    window.onload = setPlaceholders;
+  </script>
+  {% endblock %}
+{% endblock %}

@@ -1,7 +1,7 @@
 {% extends "Ideas/base.html" %}
 {% load static %}
 {% block styles %}     <link rel="stylesheet" type="text/css" href="{% static 'Ideas/style.css' %}"> {% endblock %}
-{% block titlt %} Add tags {% endblock %}
+{% block title %} Add tags {% endblock %}
 {% block body %}
 
 
@@ -34,20 +34,31 @@
         </div>
 
     </div>
-    
-{% endblock %}
-{% block scripts %}
+    {% block scripts %}
 <script>
+document.addEventListener("DOMContentLoaded", function () {
     var addTagBtn = document.getElementById("addTagBtn");
     var tagsContainer = document.getElementById("tagsContainer");
-    tagIndex = 1;
-    addTagBtn.onclick = function() {
-      console.log(1)
-      var newTagField = document.createElement('div');
-  newTagField.classList.add('input-field');
-  newTagField.innerHTML = '<i class="fa-solid fa-tag"></i> <input type="text" name="tags" placeholder="Enter a tag">';
-  tagsContainer.appendChild(newTagField);
-  tagIndex++;
-  };
-  </script>
+    var tagIndex = 1;
+
+    addTagBtn.onclick = function () {
+        // Get the last tag input field
+        var lastTagField = tagsContainer.querySelector('.input-field:last-of-type input[name="tags"]');
+        
+        // Check if the last tag field is non-empty before adding a new tag field
+        if (!lastTagField || lastTagField.value.trim() !== "") {
+            var newTagField = document.createElement('div');
+            newTagField.classList.add('input-field');
+            newTagField.innerHTML = '<i class="fa-solid fa-tag"></i> <input type="text" name="tags" placeholder="Enter a tag">';
+            tagsContainer.appendChild(newTagField);
+            tagIndex++;
+        } else {
+            console.log("Last tag field is empty. Not adding a new tag field.");
+        }
+    };
+});
+
+</script>
   {% endblock %}
+{% endblock %}
+

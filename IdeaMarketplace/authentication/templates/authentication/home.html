@@ -1,9 +1,49 @@
-{% extends "Ideas/base.html" %}
 {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="{% static 'IdeaMarketplace/home.css' %}">
+  <script src="https://kit.fontawesome.com/89aaa44108.js" crossorigin="anonymous"></script>
 
-{% block styles %}   <link rel="stylesheet" type="text/css" href="{% static 'IdeaMarketplace/home.css' %}"> {% endblock %}
-{% block title %} Home Dashboard {% endblock %}
-{% block body %}
+  <title>Document</title>
+</head>
+<body>
+  <div class="container">
+    <nav>
+      <ul>
+        <li><a href="#" class="logo">
+          <img src="../../static/images/Logo.png">
+          <span class="nav-item">{{ request.user }}</span>
+        </a></li>
+        <li><a href="#">
+          <i class="fas fa-table"></i>
+          <span class="nav-item">Dashboard</span>
+        </a></li>
+        <li><a href="#">
+          <i class="fas fa-comment"></i>
+          <span class="nav-item">Message</span>
+        </a></li>
+        <li><a href="{% url 'submit_an_idea' %}">
+          <i class="fas fa-lightbulb"></i>
+          <span class="nav-item">Submit an Idea</span>
+        </a></li>
+        <li><a href="#">
+          <i class="fas fa-search"></i>
+          <span class="nav-item">Search for ideas</span>
+        </a></li>
+        <li><a href="#">
+          <i class="fas fa-cog"></i>
+          <span class="nav-item">Setting</span>
+        </a></li>
+
+        <li><a href="{% url 'logout' %}" class="logout">
+          <i class="fas fa-sign-out-alt"></i>
+          <span class="nav-item">Log out</span>
+        </a></li>
+      </ul>
+    </nav>
 
     <section class="main">
       <div class="main-top">
@@ -145,68 +185,49 @@
       </section>
       <section class="projects">
         <div class="projects-list">
-          <h1>Ideas List </h1>
-          <table class="table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>score</th>
-                
-                <th>Details</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>01</td>
-                <td>Wellbeing tool</td>
-                <td>It's an integrative approach which combines the use of
-                  behavioural, imaginal, and problem-solving techniques and strategies
-                  within a cognitive behavioural framework to enable clients to achieve 
-                  their realistic goals.
-                </td>
-                <td>90%</td>
-                
-                <td><button>View</button></td>
-              </tr>
-              <tr class="active">
-                <td>02</td>
-                <td>Ideas & Opportunities Market Place </td>
-                <td>We are looking to design an idea management tool merged with opportunity market place.</td>
-                <td>80%</td>
-  
-                <td><button>View</button></td>
-              </tr>
-              <tr>
-                <td>03</td>
-                <td>CPMC</td>
-                <td>We are looking to revamp the use of electronic performance monitoring tools to 
-                  be used by the employees and their managers conjointly to measure optimize individual's performance
-                  through gathering information on individual behaviour.
-                </td>
-                <td>75%</td>
-            
-                <td><button>View</button></td>
-              </tr>
-              <tr>
-                <td>04</td>
-                <td>Costumer segmentation and targeting solution</td>
-                <td>This project would involve analyzing customer data to identify distinct segments based on factors such as demographics, behavior, and purchasing patterns. Once the segments are identified, the solution could then provide targeted marketing strategies to effectively reach and engage each segment.</td>
-                <td>75%</td>
-           
-                <td><button>View</button></td>
-              </tr>
-              
-
-            </tbody>
-           
-          </table>
-          <a class="view_all">View more <i class="fa-solid fa-arrow-right" id = "arrow"></i></a>
-          
-        </div>
-      </section>
+            <h1>Ideas List</h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Employee</th>
+                        <th>Value proposition</th>
+                        <th>Score</th>
+                        <th> View Idea </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for idea in ideas %}
+                    <tr>
+                        <td>{{ idea.id }}</td>
+                        <td>{{ idea.name }}</td>
+                        <td>{{ idea.description }}</td>
+                        <td> {{ idea.employee }} </td>
+                        <td>{{ idea.problem_to_solve }}</td>
+                        {% if idea.total_score %}
+                        <td>{{ idea.total_score }} %</td>
+                        {% else %}
+                        <td> N/A </td>
+                        {% endif %}
+                        <td><button onclick="redirectToIdeaDetail({{ idea.id }})">View</button></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a class="view_all" href="{% url 'view_all_ideas' %}">View<i class="fa-solid fa-arrow-right" id="arrow"></i></a>
+        </div> 
     </section>
-  </div>
+    </section>
 
-{% endblock %}
+  <script>
+       function redirectToIdeaDetail(ideaId) {
+          // Use JavaScript to redirect to the idea detail page
+          window.location.href = "{% url 'view_idea' 0 %}".replace('0', ideaId);
+      }
+  </script>
+
+
+</body>
+</html>

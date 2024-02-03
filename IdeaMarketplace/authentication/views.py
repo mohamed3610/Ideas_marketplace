@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Employee
-
-from django.contrib.auth import authenticate, login
+from Ideas.models import Ideas
+from django.contrib.auth import authenticate, login , logout
 from django.contrib.auth.views import PasswordResetView
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
@@ -57,7 +57,6 @@ def login_employee(request):
         user = authenticate(request,username=username, password=password)
         if user is not None:
             login(request,user)
-            messages.success(request, 'You have successfully logged in!')
             return redirect('Home')
         else:
             messages.error(request, 'Invalid username or password.')
@@ -69,6 +68,16 @@ def login_employee(request):
 
 def homePage(request):
     if request.user.is_authenticated:
-        return render(request , "authentication/home.html")
+        ideas = Ideas.objects.all()[:4]
+        return render(request , "authentication/home.html" , {"ideas": ideas})
     else:
         return redirect("register")
+
+def logout_employee(request):
+    if request.user.is_authenticated:
+        logout(request)
+        messages.success(request, 'You have loged out')
+        return redirect("register")
+    else:
+         return redirect("register")
+

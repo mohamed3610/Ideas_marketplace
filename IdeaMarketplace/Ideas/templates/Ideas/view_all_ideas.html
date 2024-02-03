@@ -1,0 +1,96 @@
+<!-- Ideas/your_template.html -->
+
+{% extends "Ideas/base.html" %}
+{% load static %}
+
+{% block styles %}   
+    <link rel="stylesheet" type="text/css" href="{% static 'IdeaMarketplace/home.css' %}">
+{% endblock %}
+
+{% block title %} Home Dashboard {% endblock %}
+{% block body %}
+    
+<section class="main">
+    <div class="projects-list">
+        <h1>Ideas List</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Score</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for idea in ideas %}
+                <tr>
+                    <td>{{ idea.id }}</td>
+                    <td>{{ idea.name }}</td>
+                    <td>{{ idea.description }}</td>
+                    {% if idea.total_score %}
+                    <td>{{ idea.total_score }} %</td>
+                    {% else %}
+                    <td> N/A </td>
+                    {% endif %}
+                    <td><button onclick="redirectToIdeaDetail({{ idea.id }})">View</button></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+  </section>
+  {% block scripts %}
+
+  <script>
+       function redirectToIdeaDetail(ideaId) {
+          // Use JavaScript to redirect to the idea detail page
+          window.location.href = "{% url 'view_idea' 0 %}".replace('0', ideaId);
+      }
+  </script>
+  {% endblock %}
+  
+{% endblock %}
+
+
+
+
+
+
+
+
+<!-- 
+</section>
+<section class="projects">
+  <div class="projects-list">
+      <h1>Ideas List</h1>
+      <table class="table">
+          <thead>
+              <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th>Score</th>
+                  <th>Details</th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for idea in ideas %}
+              <tr>
+                  <td>{{ idea.id }}</td>
+                  <td>{{ idea.name }}</td>
+                  <td>{{ idea.description }}</td>
+                  {% if idea.score %}
+                  <td>{{ idea.score }}%</td>
+                  {% else %}
+                  <td> N/A </td>
+                  {% endif %}
+                  <td><button>View</button></td>
+              </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+      <a class="view_all">View more <i class="fa-solid fa-arrow-right" id="arrow"></i></a>
+  </div>
+</section> -->

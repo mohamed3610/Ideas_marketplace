@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{% static 'Ideas/style.css' %}">
     {% block styles %} {% endblock %}
     <script src="https://kit.fontawesome.com/89aaa44108.js" crossorigin="anonymous"></script>
@@ -15,17 +14,17 @@
     <div class="container">
         <nav>
           <ul>
-            <li><a href="#" class="logo">
+            <li><a href="/" class="logo">
               <img src="../../static/images/Logo.png">
               <span class="nav-item">{{ request.user }}</span>
             </a></li>
-            <li><a href="#">
+            <li><a href="/">
               <i class="fas fa-table"></i>
               <span class="nav-item">Dashboard</span>
             </a></li>
-            <li><a href="#">
+            <li><a href="">
               <i class="fas fa-comment"></i>
-              <span class="nav-item">Message</span>
+              <span class="nav-item"> Requests </span>
             </a></li>
             <li><a href="{% url 'submit_an_idea' %}">
               <i class="fas fa-lightbulb"></i>
@@ -48,10 +47,10 @@
         </nav>
 
 
-    
+        
   {% block body %}
   {% endblock %}
     
 </body>
-{% block scripts %} {% endblock %}
+<!-- {% block scripts %} {% endblock %} -->
 </html>
